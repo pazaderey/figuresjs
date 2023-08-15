@@ -4,6 +4,9 @@ import { Polygon } from "../polygon/polygon";
 export class Triangle extends Polygon {
     constructor(sides: [number, number, number]) {
         super(3);
+        if (sides.some((side) => side < 0)) {
+            throw new RangeError("Side cannot be negative");
+        }
         if (!Triangle.canBeTriangle(...sides)) {
             throw new RangeError("Cannot build a triangle out of those sides");
         }
