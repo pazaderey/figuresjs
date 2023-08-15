@@ -6,8 +6,8 @@ export class Circle extends Figure {
         private _radius: number,
     ) {
         super();
-        this.calculateArea();
         this.calculatePerimeter();
+        this.calculateArea();
     }
 
     get radius(): number {
@@ -27,11 +27,13 @@ export class Circle extends Figure {
         return this._radius * 2;
     }
 
-    private calculateArea(): void {
+    /** @override */
+    protected calculateArea(): void {
         this._area = Math.PI * (this._radius ** 2);
     }
 
-    private calculatePerimeter(): void {
+    /** @override */
+    protected calculatePerimeter(): void {
         this._perimeter = 2 * Math.PI * this._radius;
     }
 }

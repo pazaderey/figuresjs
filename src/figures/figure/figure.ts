@@ -13,4 +13,10 @@ export abstract class Figure {
     get perimeter(): number {
         return this._perimeter;
     }
-};
+
+    /** @virtual */
+    protected calculateArea(): void {}
+
+    /** @virtual */
+    protected calculatePerimeter(): void {}
+}

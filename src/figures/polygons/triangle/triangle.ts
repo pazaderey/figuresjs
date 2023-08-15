@@ -3,14 +3,10 @@ import { Polygon } from "../polygon/polygon";
 
 export class Triangle extends Polygon {
     constructor(sides: [number, number, number]) {
-        super(3);
-        if (sides.some((side) => side < 0)) {
-            throw new RangeError("Side cannot be negative");
-        }
+        super(3, sides);
         if (!Triangle.canBeTriangle(...sides)) {
             throw new RangeError("Cannot build a triangle out of those sides");
         }
-        this._sides = sides;
         this.calculatePerimeter();
         this.calculateArea();
     }
@@ -34,7 +30,8 @@ export class Triangle extends Polygon {
         return (hypotenuse ** 2) === ((leg1 ** 2) + (leg2 ** 2));
     }
 
-    private calculateArea(): void {
+    /** @override */
+    protected calculateArea(): void {
         // Heron's formula
         const halfPerimeter = this.perimeter / 2;
         this._area = Math.sqrt(halfPerimeter * this._sides.reduce((acc, side) => acc * (halfPerimeter - side), 1));
