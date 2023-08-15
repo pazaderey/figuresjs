@@ -11,7 +11,7 @@ export class Triangle extends Polygon {
         this.calculateArea();
     }
 
-    static canBeTriangle(
+    public static canBeTriangle(
         side1: number,
         side2: number,
         side3: number,
@@ -23,7 +23,7 @@ export class Triangle extends Polygon {
         );
     }
 
-    static isRightTriangle(triangle: Triangle): boolean {
+    public static isRightTriangle(triangle: Triangle): boolean {
         const sides = Array.from(triangle.sides).sort((a, b) => b - a);
         const hypotenuse = sides[0];
         const [leg1, leg2] = sides.slice(1);
