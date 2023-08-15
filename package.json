@@ -1,5 +1,16 @@
 {
+  "name": "geometryjs",
   "version": "0.0.1",
+  "description": "Contains interfaces for interaction with different geometry shapes",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^5.1.6"
   }
