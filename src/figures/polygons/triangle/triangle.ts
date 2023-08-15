@@ -1,9 +1,10 @@
 import { Polygon } from "../polygon/polygon";
+import { sideConsts } from "consts";
 
 
 export class Triangle extends Polygon {
     constructor(sides: [number, number, number]) {
-        super(3, sides);
+        super(sideConsts.TRIANGLE_SIDES, sides);
         if (!Triangle.canBeTriangle(...sides)) {
             throw new RangeError("Cannot build a triangle out of those sides");
         }

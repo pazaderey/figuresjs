@@ -1,8 +1,9 @@
-import { Polygon } from "../polygon/polygon";
+import { Polygon } from "../polygon";
+import { sideConsts } from "consts";
 
 
 export class Quadrilateral extends Polygon {
     constructor(sides: [number, number, number, number]) {
-        super(4, sides);
+        super(sideConsts.QUADRILATERAL_SIDES, sides);
     }
 }

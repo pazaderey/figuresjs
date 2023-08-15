@@ -2,10 +2,11 @@ import { Figure } from "../figure";
 
 
 export class Circle extends Figure {
-    constructor(
-        private _radius: number,
-    ) {
+    private _radius = 0;
+
+    constructor(radius: number) {
         super();
+        this.radius = radius;
         this.calculatePerimeter();
         this.calculateArea();
     }
@@ -13,7 +14,7 @@ export class Circle extends Figure {
     get radius(): number {
         return this._radius;
     }
-
+    
     set radius(newRadius: number) {
         this.checkForNegative(newRadius, "Radius");
         this._radius = newRadius;

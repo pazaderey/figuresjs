@@ -1,38 +1,39 @@
 import { RegularPolygon } from "./regular-polygon";
+import { sideConsts } from "consts";
 
 
 export class RegularTriangle extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 3);
+        super(sideLength, sideConsts.TRIANGLE_SIDES);
     }
 }
 
 export class Square extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 4);
+        super(sideLength, sideConsts.QUADRILATERAL_SIDES);
     }
 }
 
 export class RegularPentagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 5);
+        super(sideLength, sideConsts.PENTAGON_SIDES);
     }
 }
 
 export class RegularHexagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 6);
+        super(sideLength, sideConsts.HEXAGON_SIDES);
     }
 }
 
 export class RegularHeptagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 7);
+        super(sideLength, sideConsts.HEPTAGON_SIDES);
     }
 }
 
 export class RegularOctagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, 8);
+        super(sideLength, sideConsts.OCTAGON_SIDES);
     }
 }
