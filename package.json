@@ -1,7 +1,8 @@
 {
   "name": "geometryjs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Contains interfaces for interaction with different geometry shapes",
+  "license": "ISC",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

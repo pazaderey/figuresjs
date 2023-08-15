@@ -1,4 +1,2 @@
-export * from "./circle/circle";
-export * from "./rectangle/rectangle";
-export * from "./regular-polygon";
-export * from "./triangle";
+export * from "./circle";
+export * from "./polygon";
