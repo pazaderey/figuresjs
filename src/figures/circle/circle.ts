@@ -15,9 +15,7 @@ export class Circle extends Figure {
     }
 
     set radius(newRadius: number) {
-        if (newRadius < 0) {
-            throw new RangeError("Radius cannot be negative");
-        }
+        this.checkForNegative(newRadius, "Radius");
         this._radius = newRadius;
         this.calculateArea();
         this.calculatePerimeter();

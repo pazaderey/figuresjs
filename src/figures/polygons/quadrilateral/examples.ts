@@ -1,6 +1,6 @@
 import { Quadrilateral } from "./quadrilateral";
 
-
+// TODO: write tsdocs
 export class Rectangle extends Quadrilateral {
     constructor(sides: [number, number]) {
         super([...sides, ...sides]);
@@ -13,21 +13,15 @@ export class Rectangle extends Quadrilateral {
 }
 
 export class Parallelogram extends Quadrilateral {
-    private _height: number;
+    private _height = 0;
     
     constructor(sides: [number, number], height: number) {
-        if (height < 0) {
-            throw new RangeError("Height cannot be negative");
-        }
         super([...sides, ...sides]);
-        this._height = height;
-        this.calculateArea();
+        this.height = height;
     }
 
     set height(newHeight: number) {
-        if (newHeight < 0) {
-            throw new RangeError("Height cannot be negative");
-        }
+        this.checkForNegative(newHeight, "Height");
         this._height = newHeight;
         this.calculateArea();
     }
@@ -43,21 +37,15 @@ export class Parallelogram extends Quadrilateral {
 }
 
 export class Trapezoid extends Quadrilateral {
-    private _height: number;
+    private _height = 0;
     
     constructor(sides: [number, number, number, number], height: number) {
-        if (height < 0) {
-            throw new RangeError("Height cannot be negative");
-        }
         super(sides);
-        this._height = height;
-        this.calculateArea();
+        this.height = height;
     }
 
     set height(newHeight: number) {
-        if (newHeight < 0) {
-            throw new RangeError("Height cannot be negative");
-        }
+        this.checkForNegative(newHeight, "Height");
         this._height = newHeight;
         this.calculateArea();
     }
@@ -73,7 +61,31 @@ export class Trapezoid extends Quadrilateral {
 }
 
 export class Kite extends Quadrilateral {
-    constructor(sides: [number, number, number, number]) {
-        super(sides);
+    private _diagonals: [number, number];
+
+    constructor(sides: [number, number], diagonals: [number, number]) {
+        super([ ...sides, ...sides ]);
+        diagonals.forEach((d) => this.checkForNegative(d, "Diagonal"));
+        this._diagonals = diagonals;
+    }
+
+    /** @override */
+    protected calculateArea(): void {
+        this._area = this._diagonals[0] * this._diagonals[1] / 2;
+    }
+}
+
+export class Rhombus extends Quadrilateral {
+    private _diagonals: [number, number];
+
+    constructor(side: number, diagonals: [number, number]) {
+        super([side, side, side, side]);
+        diagonals.forEach((d) => this.checkForNegative(d, "Diagonal"));
+        this._diagonals = diagonals;
+    }
+
+    /** @override */
+    protected calculateArea(): void {
+        this._area = this._diagonals[0] * this._diagonals[1] / 2;
     }
 }

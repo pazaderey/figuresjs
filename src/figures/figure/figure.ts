@@ -1,6 +1,6 @@
 export abstract class Figure {
-    protected _area: number = 0;
-    protected _perimeter: number = 0;
+    protected _area = 0;
+    protected _perimeter = 0;
 
     get area(): number {
         const rounded = this._area.toFixed(5);
@@ -19,4 +19,10 @@ export abstract class Figure {
 
     /** @virtual */
     protected calculatePerimeter(): void {}
+
+    protected checkForNegative(num: number, name: string): void {
+        if (num < 0) {
+            throw new RangeError(`${name} cannot be negative`);
+        }
+    }
 }

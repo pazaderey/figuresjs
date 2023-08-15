@@ -5,9 +5,7 @@ export abstract class Polygon extends Figure {
 
     constructor(sideNumber: number, sides: number[]) {
         super();
-        if (sideNumber < 0) {
-            throw new RangeError("Number of sides cannot be negative");
-        }
+        this.checkForNegative(sideNumber, "Number of sides");
         if (!Number.isInteger(sideNumber)) {
             throw new RangeError("Number of sides should be integer");
         }

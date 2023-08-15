@@ -9,20 +9,16 @@ export class RegularPolygon extends Polygon {
         sideLength: number,
         corners: number,
     ) {
-        if (sideLength < 0) {
-            throw new RangeError("Side length cannot be negative");
-        }
         super(corners, new Array<number>(corners));
         this._sides.length = 0;
+        this.checkForNegative(sideLength, "Side length");
         this._sideLength = sideLength;
         this._corners = corners;
         this.calculateArea();
     }
     
     set sideLength(newSideLength: number) {
-        if (newSideLength < 0) {
-            throw new RangeError("Side length cannot be negative");
-        }
+        this.checkForNegative(newSideLength, "Side length");
         this._sideLength = newSideLength;
         this.calculateArea();
         this.calculatePerimeter();

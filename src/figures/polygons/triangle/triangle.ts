@@ -7,7 +7,6 @@ export class Triangle extends Polygon {
         if (!Triangle.canBeTriangle(...sides)) {
             throw new RangeError("Cannot build a triangle out of those sides");
         }
-        this.calculatePerimeter();
         this.calculateArea();
     }
 
