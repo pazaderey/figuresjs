@@ -3,24 +3,9 @@ import { sideConsts } from "../../../consts";
 
 
 export class Triangle extends Polygon {
-    constructor(sides: [number, number, number]) {
+    constructor(sides: number[]) {
         super(sideConsts.TRIANGLE_SIDES, sides);
-        if (!Triangle.canBeTriangle(...sides)) {
-            throw new RangeError("Cannot build a triangle out of those sides");
-        }
         this.calculateArea();
-    }
-
-    public static canBeTriangle(
-        side1: number,
-        side2: number,
-        side3: number,
-    ): boolean {
-        return (
-            side1 < side2 + side3 &&
-            side2 < side3 + side1 &&
-            side3 < side1 + side2
-        );
     }
 
     public static isRightTriangle(triangle: Triangle): boolean {
@@ -34,7 +19,7 @@ export class Triangle extends Polygon {
     protected calculateArea(): void {
         // Heron's formula
         const halfPerimeter = this.perimeter / 2;
-        this._area = Math.sqrt(halfPerimeter * this._sides.reduce((acc, side) => acc * (halfPerimeter - side), 1));
+        this._area = Math.sqrt(halfPerimeter * this._sides.reduce((production, side) => production * (halfPerimeter - side), 1));
     }
 
 }

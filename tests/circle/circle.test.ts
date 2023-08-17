@@ -1,9 +1,9 @@
 import { Circle } from "../../src";
+import { getRandomPositive } from "../test-utils";
 
 
 describe("Circle tests", () => {
     let randomPositive: number;
-    const getRandomPositive = () => Math.random() * 100;
 
     beforeEach(() => {
         randomPositive = getRandomPositive();

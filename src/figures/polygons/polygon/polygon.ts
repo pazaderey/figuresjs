@@ -3,7 +3,7 @@ import { Figure } from "../../figure";
 
 export class Polygon extends Figure {
     protected _sides: number[] = [];
-    private _sideNumber: number;
+    protected _sideNumber: number;
 
     constructor(sideNumber: number, sides: number[]) {
         super();
@@ -15,16 +15,19 @@ export class Polygon extends Figure {
         this.sides = sides;
     }
 
-    get sides(): number[] {
+    public get sides(): number[] {
         return this._sides;
     }
 
-    set sides(sides: number[]) {
+    public set sides(sides: number[]) {
         if (sides.length !== this._sideNumber) {
             throw new RangeError(`Sides array size should be ${this._sideNumber}`);
         }
         if (sides.some((side) => side < 0)) {
             throw new RangeError("Sides cannot be negative");
+        }
+        if (!Polygon.canExist(sides)) {
+            throw new RangeError("Some side is greater than sum of the others");
         }
         this._sides.length = 0;
         this._sides = sides;
@@ -32,13 +35,23 @@ export class Polygon extends Figure {
         this.calculateArea();
     }
 
-    public static canBePolygon(polygon: Polygon): boolean {
-        // TODO: Implement canBePolygon
+    public static canExist(polygonSides: number[]): boolean {
+        for (let sideIndex = 0; sideIndex < polygonSides.length; sideIndex++) {
+            let otherSidesSum = 0;
+            for (let otherSideIndex = 0; otherSideIndex < polygonSides.length; otherSideIndex++) {
+                if (otherSideIndex !== sideIndex) {
+                    otherSidesSum += polygonSides[otherSideIndex];
+                }
+            }
+            if (otherSidesSum < polygonSides[sideIndex]) {
+                return false;
+            }
+        }
         return true;
     }
 
     /** @override */
     protected calculatePerimeter(): void {
-        this._perimeter = this._sides.reduce((acc, side) => acc + side, 0);
+        this._perimeter = this._sides.reduce((sum, side) => sum + side, 0);
     }
 }

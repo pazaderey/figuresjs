@@ -2,8 +2,7 @@
 module.exports = {
   roots: ["./tests"],
   testMatch: [
-    "**/tests/**/*.+(ts)",
-    "**/?(*.)+(test).+(ts)"
+    "**/tests/**/?(*.)+(test).+(ts)"
   ],
   transform: {
     "^.+\\.(ts)$": "ts-jest"

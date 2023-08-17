@@ -1,16 +1,13 @@
 import { Triangle } from "../../src";
+import { getValidPositives } from "../test-utils";
+import { sideConsts } from "../../src/consts";
 
 
 describe("Triangle tests", () => {
-    let randomPositives: [number, number, number];
-
-    const getRandomPositive = () => Math.random() * 100;
+    let randomPositives: number[];
     
     beforeEach(() => {
-        randomPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
-        while (!Triangle.canBeTriangle(...randomPositives)) {
-            randomPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
-        }
+        randomPositives = getValidPositives(sideConsts.TRIANGLE_SIDES);
     });
 
     describe("Creation", () => {
@@ -30,7 +27,6 @@ describe("Triangle tests", () => {
 
             randomPositives[0] = randomPositives[0] + randomPositives[1] + randomPositives[2];
             expect(() => new Triangle(randomPositives)).toThrowError();
-
         });
     });
 
@@ -45,7 +41,8 @@ describe("Triangle tests", () => {
         it("should have sides setter", () => {
             const triangle = new Triangle(randomPositives);
 
-            const newPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
+            const newPositives = getValidPositives(sideConsts.TRIANGLE_SIDES);
+
             triangle.sides = newPositives;
             expect(triangle.sides).not.toEqual(randomPositives);
             expect(triangle.sides).toEqual(newPositives);
@@ -67,7 +64,8 @@ describe("Triangle tests", () => {
             const triangle = new Triangle(randomPositives);
             const oldPerimeter = triangle.perimeter;
             
-            const newPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
+            const newPositives = getValidPositives(sideConsts.TRIANGLE_SIDES);
+
             const newPerimeter = newPositives.reduce((acc, pos) => acc + pos, 0);
             triangle.sides = newPositives;
             
@@ -83,7 +81,7 @@ describe("Triangle tests", () => {
             expect(triangle.area).toBeDefined();
 
             const halfPerimeter = triangle.perimeter / 2;
-            const area = Math.sqrt(halfPerimeter * randomPositives.reduce((acc, side) => acc * (halfPerimeter - side), 1));
+            const area = Math.sqrt(halfPerimeter * randomPositives.reduce((production, side) => production * (halfPerimeter - side), 1));
             expect(triangle.area).toBeCloseTo(area);
         });
 
@@ -92,14 +90,11 @@ describe("Triangle tests", () => {
 
             const oldArea = triangle.area;
             
-            let newPositives: [number, number, number] = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
-            while (!Triangle.canBeTriangle(...newPositives)) {
-                newPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive()];
-            }
+            const newPositives = getValidPositives(sideConsts.TRIANGLE_SIDES);
             triangle.sides = newPositives;
 
             const newHalfPerimeter = triangle.perimeter / 2;
-            const newArea = Math.sqrt(newHalfPerimeter * newPositives.reduce((acc, side) => acc * (newHalfPerimeter - side), 1));
+            const newArea = Math.sqrt(newHalfPerimeter * newPositives.reduce((production, side) => production * (newHalfPerimeter - side), 1));
 
             expect(triangle.area).not.toBeCloseTo(oldArea);
             expect(triangle.area).toBeCloseTo(newArea);
