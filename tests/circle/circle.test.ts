@@ -21,7 +21,7 @@ describe("Circle tests", () => {
 
         it("should not allow to pass incorrect params", () => {
             const randomNegative = getRandomPositive() * (-1);
-            expect(new Circle(randomNegative)).toThrowError();
+            expect(() => new Circle(randomNegative)).toThrowError();
         });
     });
 
@@ -83,6 +83,12 @@ describe("Circle tests", () => {
             circle.radius = newPositive;
             expect(circle.area).not.toBeCloseTo(Math.PI * (randomPositive ** 2));
             expect(circle.area).toBeCloseTo(Math.PI * (newPositive ** 2));
+        });
+
+        it("should round area to the nearest integer if it is almost integer", () => {
+            const circle = new Circle(1 / Math.sqrt(Math.PI));
+
+            expect(circle.area).toBe(1);
         });
     });
 

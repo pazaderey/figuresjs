@@ -29,10 +29,7 @@ export class Polygon extends Figure {
         this._sides.length = 0;
         this._sides = sides;
         this.calculatePerimeter();
-    }
-
-    get area(): never {
-        throw new Error("Cannot compute area of a random polygon yet");
+        this.calculateArea();
     }
 
     public static canBePolygon(polygon: Polygon): boolean {

@@ -1,5 +1,5 @@
 export abstract class Figure {
-    protected _area: number;
+    protected _area = 0;
     protected _perimeter: number;
 
     public get area(): number {
