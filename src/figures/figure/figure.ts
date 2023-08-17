@@ -1,8 +1,8 @@
 export abstract class Figure {
-    protected _area = 0;
-    protected _perimeter = 0;
+    protected _area: number;
+    protected _perimeter: number;
 
-    get area(): number {
+    public get area(): number {
         const rounded = this._area.toFixed(5);
         if (rounded.endsWith("00000")) {
             return Math.round(this._area);
@@ -10,7 +10,7 @@ export abstract class Figure {
         return Number(rounded);
     }
 
-    get perimeter(): number {
+    public get perimeter(): number {
         return this._perimeter;
     }
 

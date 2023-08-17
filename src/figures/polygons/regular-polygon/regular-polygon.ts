@@ -2,29 +2,27 @@ import { Polygon } from "../polygon";
 
 
 export class RegularPolygon extends Polygon {
-    private _sideLength: number;
-    private _corners: number;
+    protected _sideLength: number;
+    protected _corners: number;
 
     constructor(
         sideLength: number,
         corners: number,
     ) {
-        super(corners, new Array<number>(corners));
-        this._sides.length = 0;
-        this.checkForNegative(sideLength, "Side length");
-        this._sideLength = sideLength;
+        super(0, []);
+        this.checkForNegative(corners, "Number of corners");
         this._corners = corners;
-        this.calculateArea();
+        this.sideLength = sideLength;
     }
     
-    set sideLength(newSideLength: number) {
+    public set sideLength(newSideLength: number) {
         this.checkForNegative(newSideLength, "Side length");
         this._sideLength = newSideLength;
         this.calculateArea();
         this.calculatePerimeter();
     }
 
-    get sideLength(): number {
+    public get sideLength(): number {
         return this._sideLength;
     }
 

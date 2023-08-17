@@ -1,16 +1,24 @@
 import { RegularPolygon } from "./regular-polygon";
-import { sideConsts } from "consts";
+import { sideConsts } from "../../../consts";
 
 
 export class RegularTriangle extends RegularPolygon {
     constructor(sideLength: number) {
         super(sideLength, sideConsts.TRIANGLE_SIDES);
     }
+
+    public get height(): number {
+        return this._sideLength * Math.sqrt(3) / 2;
+    }
 }
 
 export class Square extends RegularPolygon {
     constructor(sideLength: number) {
         super(sideLength, sideConsts.QUADRILATERAL_SIDES);
+    }
+
+    public get diagonal(): number {
+        return this._sideLength * Math.SQRT2;
     }
 }
 

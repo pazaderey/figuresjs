@@ -1,5 +1,5 @@
 import { Polygon } from "../polygon/polygon";
-import { sideConsts } from "consts";
+import { sideConsts } from "../../../consts";
 
 
 export class Triangle extends Polygon {

@@ -13,7 +13,7 @@ export class Rectangle extends Quadrilateral {
 }
 
 export class Parallelogram extends Quadrilateral {
-    private _height = 0;
+    private _height: number;
     
     constructor(sides: [number, number], height: number) {
         super([...sides, ...sides]);
@@ -37,7 +37,7 @@ export class Parallelogram extends Quadrilateral {
 }
 
 export class Trapezoid extends Quadrilateral {
-    private _height = 0;
+    private _height: number;
     
     constructor(sides: [number, number, number, number], height: number) {
         super(sides);
@@ -52,6 +52,11 @@ export class Trapezoid extends Quadrilateral {
 
     get height(): number {
         return this._height
+    }
+
+    public static isIsoscelesTrapezoid(trapezoid: Trapezoid): boolean {
+        const uniqueSizes = new Set(trapezoid.sides);
+        return uniqueSizes.size === 3;
     }
 
     /** @override */
