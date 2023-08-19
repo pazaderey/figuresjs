@@ -30,7 +30,7 @@ export class Polygon extends Figure {
             throw new RangeError("Some side is greater than sum of the others");
         }
         this._sides.length = 0;
-        this._sides = [ ...sides];
+        this._sides = [ ...sides ];
         this.calculatePerimeter();
         this.calculateArea();
     }

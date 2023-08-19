@@ -1,4 +1,9 @@
-export abstract class Figure {
+interface IFigure {
+    area: number;
+    perimeter: number;
+}
+
+export abstract class Figure implements IFigure {
     protected _area = 0;
     protected _perimeter: number;
 
