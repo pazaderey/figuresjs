@@ -7,7 +7,7 @@ import { sideConsts } from "../../../consts";
  */
 export class RegularTriangle extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, sideConsts.TRIANGLE_SIDES);
+        super(sideConsts.TRIANGLE_SIDES, sideLength);
     }
 
     public get height(): number {
@@ -20,7 +20,7 @@ export class RegularTriangle extends RegularPolygon {
  */
 export class Square extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, sideConsts.QUADRILATERAL_SIDES);
+        super(sideConsts.QUADRILATERAL_SIDES, sideLength);
     }
 
     public get diagonal(): number {
@@ -33,7 +33,7 @@ export class Square extends RegularPolygon {
  */
 export class RegularPentagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, sideConsts.PENTAGON_SIDES);
+        super(sideConsts.PENTAGON_SIDES, sideLength);
     }
 }
 
@@ -42,6 +42,6 @@ export class RegularPentagon extends RegularPolygon {
  */
 export class RegularHexagon extends RegularPolygon {
     constructor(sideLength: number) {
-        super(sideLength, sideConsts.HEXAGON_SIDES);
+        super(sideConsts.HEXAGON_SIDES, sideLength);
     }
 }

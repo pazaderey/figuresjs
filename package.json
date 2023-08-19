@@ -1,6 +1,6 @@
 {
   "name": "figuresjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Contains interfaces for interaction with different geometry shapes",
   "author": "Zaderey Petr",
   "license": "ISC",
