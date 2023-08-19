@@ -22,7 +22,9 @@ $ npm install figuresjs
 
 ## Features
 
-
+ * Figure area and perimeter calculation
+ * Figure area and perimeter caching
+ * Easy to inherit new figures
 
 ## Examples
 

@@ -31,15 +31,12 @@ export class Polygon extends Figure implements IPolygon {
         this.sides = sides;
     }
 
-    /**
-     * @returns Copy of sides array
-     */
     public get sides(): number[] {
         return [ ...this._sides ] ;
     }
 
     /**
-     * Sets sides to the new array
+     * Sets or gets sides to the new array
      * @throws RangeError if any:
      * sides.length !== sideNumber;
      * any side is negative;
