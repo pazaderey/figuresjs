@@ -30,28 +30,26 @@ export class Polygon extends Figure {
             throw new RangeError("Some side is greater than sum of the others");
         }
         this._sides.length = 0;
-        this._sides = sides;
+        this._sides = [ ...sides];
         this.calculatePerimeter();
         this.calculateArea();
     }
 
     public static canExist(polygonSides: number[]): boolean {
+        const allSidesSum = polygonSides.reduce((sum, sides) => sum + sides, 0);
         for (let sideIndex = 0; sideIndex < polygonSides.length; sideIndex++) {
-            let otherSidesSum = 0;
-            for (let otherSideIndex = 0; otherSideIndex < polygonSides.length; otherSideIndex++) {
-                if (otherSideIndex !== sideIndex) {
-                    otherSidesSum += polygonSides[otherSideIndex];
-                }
-            }
-            if (otherSidesSum < polygonSides[sideIndex]) {
+            if (allSidesSum - polygonSides[sideIndex] < polygonSides[sideIndex]) {
                 return false;
             }
         }
         return true;
     }
 
-    /** @override */
     protected calculatePerimeter(): void {
         this._perimeter = this._sides.reduce((sum, side) => sum + side, 0);
+    }
+
+    protected calculateArea(): void {
+        this._area = 0;
     }
 }

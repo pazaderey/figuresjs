@@ -24,12 +24,10 @@ export class Circle extends Figure {
         return this._radius * 2;
     }
 
-    /** @override */
     protected calculateArea(): void {
         this._area = Math.PI * (this._radius ** 2);
     }
 
-    /** @override */
     protected calculatePerimeter(): void {
         this._perimeter = 2 * Math.PI * this._radius;
     }

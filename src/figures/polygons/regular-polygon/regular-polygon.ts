@@ -3,16 +3,24 @@ import { Polygon } from "../polygon";
 
 export class RegularPolygon extends Polygon {
     protected _sideLength: number;
-    protected _corners: number;
 
-    constructor(
-        sideLength: number,
-        corners: number,
-    ) {
-        super(0, []);
-        this.checkForNegative(corners, "Number of corners");
-        this._corners = corners;
+    constructor(sideNumber: number, sideLength: number) {
+        super(sideNumber, new Array(sideNumber).fill(sideLength));
         this.sideLength = sideLength;
+    }
+
+    public get sides(): number[] {
+        return new Array(this._sideNumber).fill(this._sideLength);
+    }
+
+    public set sides(newSides: number[]) {
+        super.sides = newSides;
+        this.sideLength = this._sides[0];
+        this._sides.length = 0;
+    }
+
+    public get sideLength(): number {
+        return this._sideLength;
     }
     
     public set sideLength(newSideLength: number) {
@@ -21,18 +29,12 @@ export class RegularPolygon extends Polygon {
         this.calculateArea();
         this.calculatePerimeter();
     }
-
-    public get sideLength(): number {
-        return this._sideLength;
-    }
-
-    /** @override */
+    
     protected calculateArea(): void {
-        this._area = (1 / 4) * this._corners * (this._sideLength ** 2) * (1 / Math.tan(Math.PI / this._corners));
+        this._area = (1 / 4) * this._sideNumber * (this._sideLength ** 2) * (1 / Math.tan(Math.PI / this._sideNumber));
     }
 
-    /** @override */
     protected calculatePerimeter(): void {
-        this._perimeter = this._corners * this._sideLength;
+        this._perimeter = this._sideNumber * this._sideLength;
     }
 }

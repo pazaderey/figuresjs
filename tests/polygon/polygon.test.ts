@@ -6,12 +6,12 @@ describe("Polygon tests", () => {
     const TEST_MIN_SIDES = 3;
     const TEST_MAX_SIDES = 10;
 
-    let testSidesSize: number;
+    let sideCount: number;
     let randomPositives = new Array<number>();
     
     beforeEach(() => {
-        testSidesSize = Math.round(Math.random() * (TEST_MAX_SIDES - TEST_MIN_SIDES) + TEST_MIN_SIDES);
-        randomPositives = getValidPositives(testSidesSize);
+        sideCount = Math.round(Math.random() * (TEST_MAX_SIDES - TEST_MIN_SIDES) + TEST_MIN_SIDES);
+        randomPositives = getValidPositives(sideCount);
     });
 
     afterEach(() => {
@@ -20,7 +20,7 @@ describe("Polygon tests", () => {
 
     describe("Creation", () => {
         it("should create a Polygon", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
             expect(polygon).toBeInstanceOf(Polygon);
             expect(polygon).toHaveProperty("area");
@@ -36,23 +36,26 @@ describe("Polygon tests", () => {
             expect(() => new Polygon(randomNonInteger, [])).toThrowError();
 
             randomPositives[0] = randomPositives[0] * (-1);
-            expect(() => new Polygon(testSidesSize, randomPositives)).toThrowError();
+            expect(() => new Polygon(sideCount, randomPositives)).toThrowError();
+            randomPositives[0] = randomPositives[0] * (-1);
 
+            randomPositives[0] = randomPositives.reduce((sum, num) => sum + num, 0);
+            expect(() => new Polygon(sideCount, randomPositives)).toThrowError();
         });
     });
 
     describe("sides", () => {
         it("should have sides getter", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
             expect(polygon.sides).toBeDefined();
             expect(polygon.sides).toEqual(randomPositives);
         });
 
         it("should have sides setter", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
-            const newPositives = getValidPositives(testSidesSize);
+            const newPositives = getValidPositives(sideCount);
             polygon.sides = newPositives;
             expect(polygon.sides).not.toEqual(randomPositives);
             expect(polygon.sides).toEqual(newPositives);
@@ -60,9 +63,9 @@ describe("Polygon tests", () => {
         });
 
         it("should not allow to set sides array of different length", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
-            const differentLength = testSidesSize + 1;
+            const differentLength = sideCount + 1;
             const newPositives = getValidPositives(differentLength);
             const setSides = () => polygon.sides = newPositives;
             expect(setSides).toThrow();
@@ -71,7 +74,7 @@ describe("Polygon tests", () => {
 
     describe("Area", () => {
         it("should have area getter which returns 0", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
             expect(polygon.area).toBe(0);
         });
@@ -79,7 +82,7 @@ describe("Polygon tests", () => {
 
     describe("Perimeter", () => {
         it("should have perimeter getter", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
 
             expect(polygon.perimeter).toBeDefined();
 
@@ -88,11 +91,11 @@ describe("Polygon tests", () => {
         });
 
         it("should change perimeter value", () => {
-            const polygon = new Polygon(testSidesSize, randomPositives);
+            const polygon = new Polygon(sideCount, randomPositives);
             const oldSum = randomPositives.reduce((acc, pos) => acc + pos, 0);
 
             
-            const newPositives = getValidPositives(testSidesSize);
+            const newPositives = getValidPositives(sideCount);
             const newSum = newPositives.reduce((acc, pos) => acc + pos, 0);
             polygon.sides = newPositives;
 

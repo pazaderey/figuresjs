@@ -24,9 +24,6 @@ describe("Triangle tests", () => {
             randomPositives[0] = randomPositives[0] * (-1);
             expect(() => new Triangle(randomPositives)).toThrowError();
             randomPositives[0] = randomPositives[0] * (-1);
-
-            randomPositives[0] = randomPositives[0] + randomPositives[1] + randomPositives[2];
-            expect(() => new Triangle(randomPositives)).toThrowError();
         });
     });
 

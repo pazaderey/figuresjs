@@ -14,11 +14,9 @@ export abstract class Figure {
         return this._perimeter;
     }
 
-    /** @virtual */
-    protected calculateArea(): void {}
+    protected abstract calculateArea(): void;
 
-    /** @virtual */
-    protected calculatePerimeter(): void {}
+    protected abstract calculatePerimeter(): void;
 
     protected checkForNegative(num: number, name: string): void {
         if (num < 0) {

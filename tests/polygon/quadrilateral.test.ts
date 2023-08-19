@@ -1,26 +1,13 @@
-import { Quadrilateral } from "../../src";
+import { Quadrilateral  } from "../../src";
+import { getValidPositives } from "../test-utils";
+import { sideConsts } from "../../src/consts";
 
 
 describe("Quadrilateral tests", () => {
-    let randomPositives: [number, number, number, number];
-
-    const getRandomPositive = () => Math.random() * 100;
+    let randomPositives: number[];
     
     beforeEach(() => {
-        randomPositives = [
-            getRandomPositive(),
-            getRandomPositive(),
-            getRandomPositive(),
-            getRandomPositive()
-        ];
-        while (!Quadrilateral.canExist(randomPositives)) {
-            randomPositives = [
-                getRandomPositive(),
-                getRandomPositive(),
-                getRandomPositive(),
-                getRandomPositive()
-            ];
-        }
+        randomPositives = getValidPositives(sideConsts.QUADRILATERAL_SIDES);
     });
 
     describe("Creation", () => {
@@ -38,7 +25,7 @@ describe("Quadrilateral tests", () => {
             expect(() => new Quadrilateral(randomPositives)).toThrowError();
             randomPositives[0] = randomPositives[0] * (-1);
 
-            randomPositives[0] = randomPositives[0] + randomPositives[1] + randomPositives[2];
+            randomPositives[0] = randomPositives[0] + randomPositives[1] + randomPositives[2] + randomPositives[3];
             expect(() => new Quadrilateral(randomPositives)).toThrowError();
         });
     });
@@ -54,7 +41,7 @@ describe("Quadrilateral tests", () => {
         it("should have sides setter", () => {
             const quadrilateral = new Quadrilateral(randomPositives);
 
-            const newPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive(), getRandomPositive()];
+            const newPositives = getValidPositives(sideConsts.QUADRILATERAL_SIDES);
             quadrilateral.sides = newPositives;
             expect(quadrilateral.sides).not.toEqual(randomPositives);
             expect(quadrilateral.sides).toEqual(newPositives);
@@ -77,7 +64,7 @@ describe("Quadrilateral tests", () => {
             const oldSum = randomPositives.reduce((acc, pos) => acc + pos, 0);
 
             
-            const newPositives = [getRandomPositive(), getRandomPositive(), getRandomPositive(), getRandomPositive()];
+            const newPositives = getValidPositives(sideConsts.QUADRILATERAL_SIDES);
             const newSum = newPositives.reduce((acc, pos) => acc + pos, 0);
             quadrilateral.sides = newPositives;
 
@@ -87,5 +74,14 @@ describe("Quadrilateral tests", () => {
     });
 
     describe("Area", () => {
+        it("should have area getter which returns 0", () => {
+            const quadrilateral = new Quadrilateral(randomPositives);
+
+            expect(quadrilateral.area).toBe(0);
+        });
     });
+});
+
+describe("Rectangle tests", () => {
+
 });
