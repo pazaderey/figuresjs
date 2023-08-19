@@ -1,25 +1,49 @@
 import { Quadrilateral } from "./quadrilateral";
 
-// TODO: write tsdocs
+/**
+ * Rectangle class. Rectangle is a quadrilateral with four right angles.
+ * Wiki definition - {@link https://en.wikipedia.org/wiki/Rectangle}
+ */
 export class Rectangle extends Quadrilateral {
+    /**
+     * Creates a rectangle
+     * @param sides Width and height of a rectangle
+     */
     constructor(sides: [number, number]) {
         super([...sides, ...sides]);
-        this.calculateArea();
     }
 
+    /**
+     * Calculates area of a rectangle
+     */
     protected calculateArea(): void {
         this._area = this._sides[0] * this._sides[1];
     }
 }
 
+/**
+ * Parallelogram class. Parallelogram is a simple quadrilateral with two pairs of parallel sides.
+ * Wiki definition - {@link https://en.wikipedia.org/wiki/Parallelogram}
+ */
 export class Parallelogram extends Quadrilateral {
     private _height: number;
     
+    /**
+     * Creates a parallelogram
+     * @param sides Two different sides of a parallelogram
+     * @param height Height of a parallelogram
+     * Height here is perpendicular to the first side as here:
+     * {@link https://en.wikipedia.org/wiki/Parallelogram#/media/File:ParallelogramArea.svg} where h is height and b is sides[0]
+     */
     constructor(sides: [number, number], height: number) {
         super([...sides, ...sides]);
         this.height = height;
     }
 
+    /**
+     * Sets or gets height of a parallelogram
+     * @throws RangeError if new heights is negative
+     */
     set height(newHeight: number) {
         this.checkForNegative(newHeight, "Height");
         this._height = newHeight;
@@ -30,20 +54,36 @@ export class Parallelogram extends Quadrilateral {
         return this._height
     }
 
-    /** @override */
+    /**
+     * Calculates area of a parallelogram. 
+     * {@link https://en.wikipedia.org/wiki/Parallelogram#/media/File:ParallelogramArea.svg} where h is _height and b is _sides[0]
+     */
     protected calculateArea(): void {
         this._area = this._height * this._sides[0];
     }
 }
 
+/**
+ * Trapezoid class. Trapezoid is a quadrilateral that has at least one pair of parallel sides.
+ * Wiki definition - {@link https://en.wikipedia.org/wiki/Trapezoid}
+ */
 export class Trapezoid extends Quadrilateral {
     private _height: number;
     
+    /**
+     * Creates a new trapezoid
+     * @param sides 4 sides of the trapezoid. Parallel sides are considered sides[0] and sides[2]
+     * @param height Height of a trapezoid. This is a distance between two parallel sides
+     */
     constructor(sides: [number, number, number, number], height: number) {
         super(sides);
         this.height = height;
     }
 
+    /**
+     * Sets or gets trapezoid height
+     * @throws RangeError if new height is negative
+     */
     set height(newHeight: number) {
         this.checkForNegative(newHeight, "Height");
         this._height = newHeight;
@@ -54,43 +94,22 @@ export class Trapezoid extends Quadrilateral {
         return this._height
     }
 
+    /**
+     * Checks whenever the trapezoid is Isosceles.
+     * Wiki definition - {@link https://en.wikipedia.org/wiki/Isosceles_trapezoid}
+     * @param trapezoid Trapezoid to check
+     * @returns If a trapezoid is Isosceles
+     */
     public static isIsoscelesTrapezoid(trapezoid: Trapezoid): boolean {
         const uniqueSizes = new Set(trapezoid.sides);
         return uniqueSizes.size === 3;
     }
 
-    /** @override */
+    /**
+     * Calculates area of a trapezoid
+     * Wiki definition - {@link https://en.wikipedia.org/wiki/Trapezoid#Area} where a, b, h are _sides[0], sides[2], _height respectively.
+     */
     protected calculateArea(): void {
         this._area = this._height * (this._sides[0] + this._sides[2]) / 2;
-    }
-}
-
-export class Kite extends Quadrilateral {
-    private _diagonals: [number, number];
-
-    constructor(sides: [number, number], diagonals: [number, number]) {
-        super([ ...sides, ...sides ]);
-        diagonals.forEach((d) => this.checkForNegative(d, "Diagonal"));
-        this._diagonals = diagonals;
-    }
-
-    /** @override */
-    protected calculateArea(): void {
-        this._area = this._diagonals[0] * this._diagonals[1] / 2;
-    }
-}
-
-export class Rhombus extends Quadrilateral {
-    private _diagonals: [number, number];
-
-    constructor(side: number, diagonals: [number, number]) {
-        super([side, side, side, side]);
-        diagonals.forEach((d) => this.checkForNegative(d, "Diagonal"));
-        this._diagonals = diagonals;
-    }
-
-    /** @override */
-    protected calculateArea(): void {
-        this._area = this._diagonals[0] * this._diagonals[1] / 2;
     }
 }

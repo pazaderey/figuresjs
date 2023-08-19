@@ -1,5 +1,5 @@
-import { Quadrilateral  } from "../../src";
-import { getValidPositives } from "../test-utils";
+import { Quadrilateral, Rectangle } from "../../src";
+import { getValidPositives, getRandomPositive } from "../test-utils";
 import { sideConsts } from "../../src/consts";
 
 
@@ -27,6 +27,14 @@ describe("Quadrilateral tests", () => {
 
             randomPositives[0] = randomPositives[0] + randomPositives[1] + randomPositives[2] + randomPositives[3];
             expect(() => new Quadrilateral(randomPositives)).toThrowError();
+        });
+
+        it("should create example child classes", () => {
+            const sides = [getRandomPositive(), getRandomPositive()];
+            const rect = new Rectangle(sides as [number, number]);
+
+            expect(rect).toBeInstanceOf(Rectangle);
+            expect(rect).toBeInstanceOf(Quadrilateral);
         });
     });
 

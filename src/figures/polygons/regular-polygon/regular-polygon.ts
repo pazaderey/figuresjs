@@ -1,7 +1,8 @@
 import { Polygon } from "../polygon";
+import { IRegularPolygon } from "../../../types";
 
 
-export class RegularPolygon extends Polygon {
+export class RegularPolygon extends Polygon implements IRegularPolygon {
     protected _sideLength: number;
 
     constructor(sideNumber: number, sideLength: number) {
